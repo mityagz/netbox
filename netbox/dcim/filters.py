@@ -8,7 +8,7 @@ from netaddr.core import AddrFormatError
 
 from extras.filters import CustomFieldFilterSet
 from tenancy.models import Tenant
-from utilities.filters import NullableCharFieldFilter, NumericInFilter
+from utilities.filters import NullableCharFieldFilter, NumericInFilter, TagFilter
 from virtualization.models import Cluster
 from .constants import (
     DEVICE_STATUS_CHOICES, IFACE_FF_LAG, NONCONNECTABLE_IFACE_TYPES, SITE_STATUS_CHOICES, VIRTUAL_IFACE_TYPES,
@@ -82,6 +82,7 @@ class SiteFilter(CustomFieldFilterSet, django_filters.FilterSet):
         to_field_name='slug',
         label='Tenant (slug)',
     )
+    tags = TagFilter()
 
     class Meta:
         model = Site
@@ -179,6 +180,7 @@ class RackFilter(CustomFieldFilterSet, django_filters.FilterSet):
         to_field_name='slug',
         label='Role (slug)',
     )
+    tags = TagFilter()
 
     class Meta:
         model = Rack
@@ -286,6 +288,7 @@ class DeviceTypeFilter(CustomFieldFilterSet, django_filters.FilterSet):
         to_field_name='slug',
         label='Manufacturer (slug)',
     )
+    tags = TagFilter()
 
     class Meta:
         model = DeviceType
@@ -497,6 +500,7 @@ class DeviceFilter(CustomFieldFilterSet, django_filters.FilterSet):
         queryset=VirtualChassis.objects.all(),
         label='Virtual chassis (ID)',
     )
+    tags = TagFilter()
 
     class Meta:
         model = Device
@@ -665,6 +669,7 @@ class InventoryItemFilter(DeviceComponentFilterSet):
         label='Manufacturer (slug)',
     )
     asset_tag = NullableCharFieldFilter()
+    tags = TagFilter()
 
     class Meta:
         model = InventoryItem
@@ -710,6 +715,7 @@ class VirtualChassisFilter(django_filters.FilterSet):
         to_field_name='slug',
         label='Tenant (slug)',
     )
+    tags = TagFilter()
 
     class Meta:
         model = VirtualChassis

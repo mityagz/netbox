@@ -4,7 +4,7 @@ import django_filters
 from django.db.models import Q
 
 from dcim.models import Device
-from utilities.filters import NumericInFilter
+from utilities.filters import NumericInFilter, TagFilter
 from .models import Secret, SecretRole
 
 
@@ -41,6 +41,7 @@ class SecretFilter(django_filters.FilterSet):
         to_field_name='name',
         label='Device (name)',
     )
+    tags = TagFilter()
 
     class Meta:
         model = Secret

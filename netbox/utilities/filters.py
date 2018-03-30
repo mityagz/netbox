@@ -65,3 +65,16 @@ class NullableModelMultipleChoiceField(forms.ModelMultipleChoiceField):
             stripped_value = value
         super(NullableModelMultipleChoiceField, self).clean(stripped_value)
         return value
+
+
+class TagFilter(django_filters.Filter):
+    """
+    Match a comma-separated list of tag strings. All tags specified must be present.
+    """
+    field_class = forms.CharField
+
+    def filter(self, qs, value):
+        if not value:
+            return qs
+        tags = value.split(',')
+        return qs.filter(**{'{}__contains'.format(self.field_name): tags})
