@@ -145,6 +145,14 @@ nav ul.pagination {
     margin-bottom: 8px !important;
 }
 
+/* Tag lists */
+ul.tag-list {
+    padding-bottom: 0;
+}
+ul.tag-list li {
+    margin-bottom: 12px;
+}
+
 /* Racks */
 div.rack_header {
     margin-left: 36px;

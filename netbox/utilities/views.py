@@ -20,8 +20,8 @@ from django.views.generic import View
 from django_tables2 import RequestConfig
 
 from extras.models import CustomField, CustomFieldValue, ExportTemplate, UserAction
-from utilities.utils import queryset_to_csv
 from utilities.forms import BootstrapMixin, CSVDataField
+from utilities.utils import queryset_to_csv
 from .constants import M2M_FIELD_TYPES
 from .error_handlers import handle_protectederror
 from .forms import ConfirmationForm
@@ -119,6 +119,9 @@ class ObjectListView(View):
         if 'pk' in table.base_columns and (permissions['change'] or permissions['delete']):
             table.columns.show('pk')
 
+        # Include list of tags if applicable
+        tags = model.get_all_tags() if hasattr(model, 'tags') else None
+
         # Apply the request context
         paginate = {
             'klass': EnhancedPaginator,
@@ -131,6 +134,7 @@ class ObjectListView(View):
             'table': table,
             'permissions': permissions,
             'filter_form': self.filter_form(request.GET, label_suffix='') if self.filter_form else None,
+            'tags': tags,
         }
         context.update(self.extra_context())
 

@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 
+import itertools
+
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
@@ -21,3 +23,11 @@ class TaggedModel(models.Model):
 
     class Meta:
         abstract=True
+
+    @classmethod
+    def get_all_tags(cls):
+        """
+        Return a list of all unique tags for this model.
+        """
+        queryset = cls.objects.exclude(tags=None).values_list('tags', flat=True)
+        return sorted(set(itertools.chain(*queryset)))

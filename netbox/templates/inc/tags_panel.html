@@ -1,0 +1,17 @@
+{% load helpers %}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span class="fa fa-tags" aria-hidden="true"></span>
+        <strong>Tags</strong>
+    </div>
+    <ul class="panel-body list-inline tag-list">
+        {% for tag in tags %}
+            <li>
+                <a href="{% querystring request tag=tag %}" class="btn btn-sm btn-default{% if request.GET.tag == tag %} btn-primary{% endif %}">{{ tag }}</a>
+            </li>
+        {% empty %}
+            <li class="text-muted">None assigned</li>
+        {% endfor %}
+    </ul>
+</div>
