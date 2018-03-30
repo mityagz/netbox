@@ -13,14 +13,14 @@ from django.utils.encoding import python_2_unicode_compatible
 
 from dcim.models import Interface
 from extras.models import CustomFieldModel
-from utilities.models import CreatedUpdatedModel
+from utilities.models import CreatedUpdatedModel, TaggedModel
 from .constants import *
 from .fields import IPNetworkField, IPAddressField
 from .querysets import PrefixQuerySet
 
 
 @python_2_unicode_compatible
-class VRF(CreatedUpdatedModel, CustomFieldModel):
+class VRF(CreatedUpdatedModel, TaggedModel, CustomFieldModel):
     """
     A virtual routing and forwarding (VRF) table represents a discrete layer three forwarding domain (e.g. a routing
     table). Prefixes and IPAddresses can optionally be assigned to VRFs. (Prefixes and IPAddresses not assigned to a VRF
@@ -126,7 +126,7 @@ class RIR(models.Model):
 
 
 @python_2_unicode_compatible
-class Aggregate(CreatedUpdatedModel, CustomFieldModel):
+class Aggregate(CreatedUpdatedModel, TaggedModel, CustomFieldModel):
     """
     An aggregate exists at the root level of the IP address space hierarchy in NetBox. Aggregates are used to organize
     the hierarchy and track the overall utilization of available address space. Each Aggregate is assigned to a RIR.
@@ -252,7 +252,7 @@ class Role(models.Model):
 
 
 @python_2_unicode_compatible
-class Prefix(CreatedUpdatedModel, CustomFieldModel):
+class Prefix(CreatedUpdatedModel, TaggedModel, CustomFieldModel):
     """
     A Prefix represents an IPv4 or IPv6 network, including mask length. Prefixes can optionally be assigned to Sites and
     VRFs. A Prefix must be assigned a status and may optionally be assigned a used-define Role. A Prefix can also be
@@ -491,7 +491,7 @@ class IPAddressManager(models.Manager):
 
 
 @python_2_unicode_compatible
-class IPAddress(CreatedUpdatedModel, CustomFieldModel):
+class IPAddress(CreatedUpdatedModel, TaggedModel, CustomFieldModel):
     """
     An IPAddress represents an individual IPv4 or IPv6 address and its mask. The mask length should match what is
     configured in the real world. (Typically, only loopback interfaces are configured with /32 or /128 masks.) Like
@@ -700,7 +700,7 @@ class VLANGroup(models.Model):
 
 
 @python_2_unicode_compatible
-class VLAN(CreatedUpdatedModel, CustomFieldModel):
+class VLAN(CreatedUpdatedModel, TaggedModel, CustomFieldModel):
     """
     A VLAN is a distinct layer two forwarding domain identified by a 12-bit integer (1-4094). Each VLAN must be assigned
     to a Site, however VLAN IDs need not be unique within a Site. A VLAN may optionally be assigned to a VLANGroup,

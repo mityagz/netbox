@@ -66,8 +66,8 @@ class SiteSerializer(CustomFieldModelSerializer):
         fields = [
             'id', 'name', 'slug', 'status', 'region', 'tenant', 'facility', 'asn', 'time_zone', 'description',
             'physical_address', 'shipping_address', 'contact_name', 'contact_phone', 'contact_email', 'comments',
-            'custom_fields', 'created', 'last_updated', 'count_prefixes', 'count_vlans', 'count_racks', 'count_devices',
-            'count_circuits',
+            'tags', 'custom_fields', 'created', 'last_updated', 'count_prefixes', 'count_vlans', 'count_racks',
+            'count_devices', 'count_circuits',
         ]
 
 
@@ -87,7 +87,7 @@ class WritableSiteSerializer(CustomFieldModelSerializer):
         fields = [
             'id', 'name', 'slug', 'status', 'region', 'tenant', 'facility', 'asn', 'time_zone', 'description',
             'physical_address', 'shipping_address', 'contact_name', 'contact_phone', 'contact_email', 'comments',
-            'custom_fields', 'created', 'last_updated',
+            'tags', 'custom_fields', 'created', 'last_updated',
         ]
 
 
@@ -153,7 +153,7 @@ class RackSerializer(CustomFieldModelSerializer):
         model = Rack
         fields = [
             'id', 'name', 'facility_id', 'display_name', 'site', 'group', 'tenant', 'role', 'serial', 'type', 'width',
-            'u_height', 'desc_units', 'comments', 'custom_fields', 'created', 'last_updated',
+            'u_height', 'desc_units', 'comments', 'tags', 'custom_fields', 'created', 'last_updated',
         ]
 
 
@@ -171,7 +171,7 @@ class WritableRackSerializer(CustomFieldModelSerializer):
         model = Rack
         fields = [
             'id', 'name', 'facility_id', 'site', 'group', 'tenant', 'role', 'serial', 'type', 'width', 'u_height',
-            'desc_units', 'comments', 'custom_fields', 'created', 'last_updated',
+            'desc_units', 'comments', 'tags', 'custom_fields', 'created', 'last_updated',
         ]
         # Omit the UniqueTogetherValidator that would be automatically added to validate (site, facility_id). This
         # prevents facility_id from being interpreted as a required field.
@@ -269,7 +269,7 @@ class DeviceTypeSerializer(CustomFieldModelSerializer):
         model = DeviceType
         fields = [
             'id', 'manufacturer', 'model', 'slug', 'part_number', 'u_height', 'is_full_depth', 'interface_ordering',
-            'is_console_server', 'is_pdu', 'is_network_device', 'subdevice_role', 'comments', 'custom_fields',
+            'is_console_server', 'is_pdu', 'is_network_device', 'subdevice_role', 'comments', 'tags', 'custom_fields',
             'instance_count',
         ]
 
@@ -289,7 +289,7 @@ class WritableDeviceTypeSerializer(CustomFieldModelSerializer):
         model = DeviceType
         fields = [
             'id', 'manufacturer', 'model', 'slug', 'part_number', 'u_height', 'is_full_depth', 'interface_ordering',
-            'is_console_server', 'is_pdu', 'is_network_device', 'subdevice_role', 'comments', 'custom_fields',
+            'is_console_server', 'is_pdu', 'is_network_device', 'subdevice_role', 'comments', 'tags', 'custom_fields',
         ]
 
 
@@ -507,7 +507,7 @@ class DeviceSerializer(CustomFieldModelSerializer):
         fields = [
             'id', 'name', 'display_name', 'device_type', 'device_role', 'tenant', 'platform', 'serial', 'asset_tag',
             'site', 'rack', 'position', 'face', 'parent_device', 'status', 'primary_ip', 'primary_ip4', 'primary_ip6',
-            'cluster', 'virtual_chassis', 'vc_position', 'vc_priority', 'comments', 'custom_fields', 'created',
+            'cluster', 'virtual_chassis', 'vc_position', 'vc_priority', 'comments', 'tags', 'custom_fields', 'created',
             'last_updated',
         ]
 
@@ -529,7 +529,7 @@ class WritableDeviceSerializer(CustomFieldModelSerializer):
         fields = [
             'id', 'name', 'device_type', 'device_role', 'tenant', 'platform', 'serial', 'asset_tag', 'site', 'rack',
             'position', 'face', 'status', 'primary_ip4', 'primary_ip6', 'cluster', 'virtual_chassis', 'vc_position',
-            'vc_priority', 'comments', 'custom_fields', 'created', 'last_updated',
+            'vc_priority', 'comments', 'tags', 'custom_fields', 'created', 'last_updated',
         ]
         validators = []
 
@@ -789,7 +789,7 @@ class InventoryItemSerializer(serializers.ModelSerializer):
         model = InventoryItem
         fields = [
             'id', 'device', 'parent', 'name', 'manufacturer', 'part_id', 'serial', 'asset_tag', 'discovered',
-            'description',
+            'description', 'tags',
         ]
 
 
@@ -801,7 +801,7 @@ class WritableInventoryItemSerializer(ValidatedModelSerializer):
         model = InventoryItem
         fields = [
             'id', 'device', 'parent', 'name', 'manufacturer', 'part_id', 'serial', 'asset_tag', 'discovered',
-            'description',
+            'description', 'tags',
         ]
 
 
@@ -843,7 +843,7 @@ class VirtualChassisSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = VirtualChassis
-        fields = ['id', 'master', 'domain']
+        fields = ['id', 'master', 'domain', 'tags']
 
 
 class NestedVirtualChassisSerializer(serializers.ModelSerializer):
@@ -858,4 +858,4 @@ class WritableVirtualChassisSerializer(ValidatedModelSerializer):
 
     class Meta:
         model = VirtualChassis
-        fields = ['id', 'master', 'domain']
+        fields = ['id', 'master', 'domain', 'tags']

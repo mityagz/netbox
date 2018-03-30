@@ -28,8 +28,8 @@ class VRFSerializer(CustomFieldModelSerializer):
     class Meta:
         model = VRF
         fields = [
-            'id', 'name', 'rd', 'tenant', 'enforce_unique', 'description', 'display_name', 'custom_fields', 'created',
-            'last_updated',
+            'id', 'name', 'rd', 'tenant', 'enforce_unique', 'description', 'display_name', 'tags', 'custom_fields',
+            'created', 'last_updated',
         ]
 
 
@@ -46,7 +46,8 @@ class WritableVRFSerializer(CustomFieldModelSerializer):
     class Meta:
         model = VRF
         fields = [
-            'id', 'name', 'rd', 'tenant', 'enforce_unique', 'description', 'custom_fields', 'created', 'last_updated',
+            'id', 'name', 'rd', 'tenant', 'enforce_unique', 'description', 'tags', 'custom_fields', 'created',
+            'last_updated',
         ]
 
 
@@ -98,7 +99,8 @@ class AggregateSerializer(CustomFieldModelSerializer):
     class Meta:
         model = Aggregate
         fields = [
-            'id', 'family', 'prefix', 'rir', 'date_added', 'description', 'custom_fields', 'created', 'last_updated',
+            'id', 'family', 'prefix', 'rir', 'date_added', 'description', 'tags', 'custom_fields', 'created',
+            'last_updated',
         ]
 
 
@@ -114,7 +116,9 @@ class WritableAggregateSerializer(CustomFieldModelSerializer):
 
     class Meta:
         model = Aggregate
-        fields = ['id', 'prefix', 'rir', 'date_added', 'description', 'custom_fields', 'created', 'last_updated']
+        fields = [
+            'id', 'prefix', 'rir', 'date_added', 'description', 'tags', 'custom_fields', 'created', 'last_updated',
+        ]
 
 
 #
@@ -173,7 +177,7 @@ class VLANSerializer(CustomFieldModelSerializer):
     class Meta:
         model = VLAN
         fields = [
-            'id', 'site', 'group', 'vid', 'name', 'tenant', 'status', 'role', 'description', 'display_name',
+            'id', 'site', 'group', 'vid', 'name', 'tenant', 'status', 'role', 'description', 'display_name', 'tags',
             'custom_fields', 'created', 'last_updated',
         ]
 
@@ -191,8 +195,8 @@ class WritableVLANSerializer(CustomFieldModelSerializer):
     class Meta:
         model = VLAN
         fields = [
-            'id', 'site', 'group', 'vid', 'name', 'tenant', 'status', 'role', 'description', 'custom_fields', 'created',
-            'last_updated',
+            'id', 'site', 'group', 'vid', 'name', 'tenant', 'status', 'role', 'description', 'tags', 'custom_fields',
+            'created','last_updated',
         ]
         validators = []
 
@@ -227,7 +231,7 @@ class PrefixSerializer(CustomFieldModelSerializer):
         model = Prefix
         fields = [
             'id', 'family', 'prefix', 'site', 'vrf', 'tenant', 'vlan', 'status', 'role', 'is_pool', 'description',
-            'custom_fields', 'created', 'last_updated',
+            'tags', 'custom_fields', 'created', 'last_updated',
         ]
 
 
@@ -244,7 +248,7 @@ class WritablePrefixSerializer(CustomFieldModelSerializer):
     class Meta:
         model = Prefix
         fields = [
-            'id', 'prefix', 'site', 'vrf', 'tenant', 'vlan', 'status', 'role', 'is_pool', 'description',
+            'id', 'prefix', 'site', 'vrf', 'tenant', 'vlan', 'status', 'role', 'is_pool', 'description', 'tags',
             'custom_fields', 'created', 'last_updated',
         ]
 
@@ -298,7 +302,7 @@ class IPAddressSerializer(CustomFieldModelSerializer):
         model = IPAddress
         fields = [
             'id', 'family', 'address', 'vrf', 'tenant', 'status', 'role', 'interface', 'description', 'nat_inside',
-            'nat_outside', 'custom_fields', 'created', 'last_updated',
+            'nat_outside', 'tags', 'custom_fields', 'created', 'last_updated',
         ]
 
 
@@ -319,7 +323,7 @@ class WritableIPAddressSerializer(CustomFieldModelSerializer):
     class Meta:
         model = IPAddress
         fields = [
-            'id', 'address', 'vrf', 'tenant', 'status', 'role', 'interface', 'description', 'nat_inside',
+            'id', 'address', 'vrf', 'tenant', 'status', 'role', 'interface', 'description', 'nat_inside', 'tags',
             'custom_fields', 'created', 'last_updated',
         ]
 

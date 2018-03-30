@@ -37,7 +37,7 @@ class SecretSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Secret
-        fields = ['id', 'device', 'role', 'name', 'plaintext', 'hash', 'created', 'last_updated']
+        fields = ['id', 'device', 'role', 'name', 'plaintext', 'hash', 'tags', 'created', 'last_updated']
 
 
 class WritableSecretSerializer(serializers.ModelSerializer):
@@ -45,7 +45,7 @@ class WritableSecretSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Secret
-        fields = ['id', 'device', 'role', 'name', 'plaintext', 'hash', 'created', 'last_updated']
+        fields = ['id', 'device', 'role', 'name', 'plaintext', 'hash', 'tags', 'created', 'last_updated']
         validators = []
 
     def validate(self, data):

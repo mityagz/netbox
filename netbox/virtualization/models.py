@@ -9,7 +9,7 @@ from django.utils.encoding import python_2_unicode_compatible
 
 from dcim.models import Device
 from extras.models import CustomFieldModel
-from utilities.models import CreatedUpdatedModel
+from utilities.models import CreatedUpdatedModel, TaggedModel
 from .constants import DEVICE_STATUS_ACTIVE, VM_STATUS_CHOICES, VM_STATUS_CLASSES
 
 
@@ -88,7 +88,7 @@ class ClusterGroup(models.Model):
 #
 
 @python_2_unicode_compatible
-class Cluster(CreatedUpdatedModel, CustomFieldModel):
+class Cluster(CreatedUpdatedModel, TaggedModel, CustomFieldModel):
     """
     A cluster of VirtualMachines. Each Cluster may optionally be associated with one or more Devices.
     """
@@ -162,7 +162,7 @@ class Cluster(CreatedUpdatedModel, CustomFieldModel):
 #
 
 @python_2_unicode_compatible
-class VirtualMachine(CreatedUpdatedModel, CustomFieldModel):
+class VirtualMachine(CreatedUpdatedModel, TaggedModel, CustomFieldModel):
     """
     A virtual machine which runs inside a Cluster.
     """

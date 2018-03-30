@@ -62,7 +62,9 @@ class ClusterSerializer(CustomFieldModelSerializer):
 
     class Meta:
         model = Cluster
-        fields = ['id', 'name', 'type', 'group', 'site', 'comments', 'custom_fields', 'created', 'last_updated']
+        fields = [
+            'id', 'name', 'type', 'group', 'site', 'comments', 'tags', 'custom_fields', 'created', 'last_updated',
+        ]
 
 
 class NestedClusterSerializer(serializers.ModelSerializer):
@@ -77,7 +79,9 @@ class WritableClusterSerializer(CustomFieldModelSerializer):
 
     class Meta:
         model = Cluster
-        fields = ['id', 'name', 'type', 'group', 'site', 'comments', 'custom_fields', 'created', 'last_updated']
+        fields = [
+            'id', 'name', 'type', 'group', 'site', 'comments', 'tags', 'custom_fields', 'created', 'last_updated',
+        ]
 
 
 #
@@ -107,7 +111,7 @@ class VirtualMachineSerializer(CustomFieldModelSerializer):
         model = VirtualMachine
         fields = [
             'id', 'name', 'status', 'cluster', 'role', 'tenant', 'platform', 'primary_ip', 'primary_ip4', 'primary_ip6',
-            'vcpus', 'memory', 'disk', 'comments', 'custom_fields', 'created', 'last_updated',
+            'vcpus', 'memory', 'disk', 'comments', 'tags', 'custom_fields', 'created', 'last_updated',
         ]
 
 
@@ -125,7 +129,7 @@ class WritableVirtualMachineSerializer(CustomFieldModelSerializer):
         model = VirtualMachine
         fields = [
             'id', 'name', 'status', 'cluster', 'role', 'tenant', 'platform', 'primary_ip4', 'primary_ip6', 'vcpus',
-            'memory', 'disk', 'comments', 'custom_fields', 'created', 'last_updated',
+            'memory', 'disk', 'comments', 'tags', 'custom_fields', 'created', 'last_updated',
         ]
 
 

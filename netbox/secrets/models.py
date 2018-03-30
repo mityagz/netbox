@@ -13,7 +13,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.encoding import force_bytes, python_2_unicode_compatible
 
-from utilities.models import CreatedUpdatedModel
+from utilities.models import CreatedUpdatedModel, TaggedModel
 from .exceptions import InvalidKey
 from .hashers import SecretValidationHasher
 from .querysets import UserKeyQuerySet
@@ -303,7 +303,7 @@ class SecretRole(models.Model):
 
 
 @python_2_unicode_compatible
-class Secret(CreatedUpdatedModel):
+class Secret(CreatedUpdatedModel, TaggedModel):
     """
     A Secret stores an AES256-encrypted copy of sensitive data, such as passwords or secret keys. An irreversible
     SHA-256 hash is stored along with the ciphertext for validation upon decryption. Each Secret is assigned to a

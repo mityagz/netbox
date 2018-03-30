@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.utils.encoding import python_2_unicode_compatible
 
 from extras.models import CustomFieldModel
-from utilities.models import CreatedUpdatedModel
+from utilities.models import CreatedUpdatedModel, TaggedModel
 
 
 @python_2_unicode_compatible
@@ -41,7 +41,7 @@ class TenantGroup(models.Model):
 
 
 @python_2_unicode_compatible
-class Tenant(CreatedUpdatedModel, CustomFieldModel):
+class Tenant(CreatedUpdatedModel, TaggedModel, CustomFieldModel):
     """
     A Tenant represents an organization served by the NetBox owner. This is typically a customer or an internal
     department.

@@ -8,12 +8,12 @@ from django.utils.encoding import python_2_unicode_compatible
 from dcim.constants import STATUS_CLASSES
 from dcim.fields import ASNField
 from extras.models import CustomFieldModel
-from utilities.models import CreatedUpdatedModel
+from utilities.models import CreatedUpdatedModel, TaggedModel
 from .constants import CIRCUIT_STATUS_ACTIVE, CIRCUIT_STATUS_CHOICES, TERM_SIDE_CHOICES
 
 
 @python_2_unicode_compatible
-class Provider(CreatedUpdatedModel, CustomFieldModel):
+class Provider(CreatedUpdatedModel, TaggedModel, CustomFieldModel):
     """
     Each Circuit belongs to a Provider. This is usually a telecommunications company or similar organization. This model
     stores information pertinent to the user's relationship with the Provider.
@@ -113,7 +113,7 @@ class CircuitType(models.Model):
 
 
 @python_2_unicode_compatible
-class Circuit(CreatedUpdatedModel, CustomFieldModel):
+class Circuit(CreatedUpdatedModel, TaggedModel, CustomFieldModel):
     """
     A communications circuit connects two points. Each Circuit belongs to a Provider; Providers may have multiple
     circuits. Each circuit is also assigned a CircuitType and a Site. A Circuit may be terminated to a specific device

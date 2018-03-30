@@ -21,7 +21,7 @@ from extras.models import CustomFieldModel
 from extras.rpc import RPC_CLIENTS
 from utilities.fields import ColorField, NullableCharField
 from utilities.managers import NaturalOrderByManager
-from utilities.models import CreatedUpdatedModel
+from utilities.models import CreatedUpdatedModel, TaggedModel
 from .constants import *
 from .fields import ASNField, MACAddressField
 from .querysets import InterfaceQuerySet
@@ -82,7 +82,7 @@ class SiteManager(NaturalOrderByManager):
 
 
 @python_2_unicode_compatible
-class Site(CreatedUpdatedModel, CustomFieldModel):
+class Site(CreatedUpdatedModel, TaggedModel, CustomFieldModel):
     """
     A Site represents a geographic location within a network; typically a building or campus. The optional facility
     field can be used to include an external designation, such as a data center name (e.g. Equinix SV6).
@@ -308,7 +308,7 @@ class RackManager(NaturalOrderByManager):
 
 
 @python_2_unicode_compatible
-class Rack(CreatedUpdatedModel, CustomFieldModel):
+class Rack(CreatedUpdatedModel, TaggedModel, CustomFieldModel):
     """
     Devices are housed within Racks. Each rack has a defined height measured in rack units, and a front and rear face.
     Each Rack is assigned to a Site and (optionally) a RackGroup.
@@ -673,7 +673,7 @@ class Manufacturer(models.Model):
 
 
 @python_2_unicode_compatible
-class DeviceType(models.Model, CustomFieldModel):
+class DeviceType(TaggedModel, CustomFieldModel):
     """
     A DeviceType represents a particular make (Manufacturer) and model of device. It specifies rack height and depth, as
     well as high-level functional role(s).
@@ -1093,7 +1093,7 @@ class DeviceManager(NaturalOrderByManager):
 
 
 @python_2_unicode_compatible
-class Device(CreatedUpdatedModel, CustomFieldModel):
+class Device(CreatedUpdatedModel, TaggedModel, CustomFieldModel):
     """
     A Device represents a piece of physical hardware mounted within a Rack. Each Device is assigned a DeviceType,
     DeviceRole, and (optionally) a Platform. Device names are not required, however if one is set it must be unique.
@@ -1989,7 +1989,7 @@ class DeviceBay(models.Model):
 #
 
 @python_2_unicode_compatible
-class InventoryItem(models.Model):
+class InventoryItem(TaggedModel, models.Model):
     """
     An InventoryItem represents a serialized piece of hardware within a Device, such as a line card or power supply.
     InventoryItems are used only for inventory purposes.
@@ -2076,7 +2076,7 @@ class InventoryItem(models.Model):
 #
 
 @python_2_unicode_compatible
-class VirtualChassis(models.Model):
+class VirtualChassis(TaggedModel, models.Model):
     """
     A collection of Devices which operate with a shared control plane (e.g. a switch stack).
     """
